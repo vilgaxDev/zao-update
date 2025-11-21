@@ -66,21 +66,25 @@ const agencies = [
   },
 ];
 
+import EmpoweringSection from "@/components/agencies-page/EmpoweringSection";
+
 const Agencies = () => {
   return (
     <div className="min-h-screen">
       <Navbar />
-      
+
+      <EmpoweringSection />
+
       <section className="py-32 bg-cream">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
             <h1 className="text-5xl lg:text-6xl font-bold mb-6">Trusted Agencies in Kenya</h1>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              To empower every farmer with smart, accessible tools and knowledge that boost productivity, income, and 
+              To empower every farmer with smart, accessible tools and knowledge that boost productivity, income, and
               sustainable farming.
             </p>
           </div>
-          
+
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
             {agencies.map((agency) => (
               <div key={agency.name} className="bg-background rounded-2xl p-8 shadow-lg border border-border hover:shadow-xl transition-shadow">
@@ -105,7 +109,7 @@ const Agencies = () => {
           </div>
         </div>
       </section>
-      
+
       <Footer />
     </div>
   );

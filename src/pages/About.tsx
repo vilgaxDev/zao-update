@@ -1,25 +1,25 @@
 import Navbar from "@/components/Navbar";
-
 import Footer from "@/components/Footer";
-import HeroSection from "@/components/about/HeroSection";
-import MissionSection from "@/components/about/MissionSection";
-import FeaturesSection from "@/components/about/FeaturesSection";
-import AccessSection from "@/components/about/AccessSection";
-import TestimonialsSection from "@/components/about/TestimonialsSection";
-import AgenciesSection from "@/components/about/AgenciesSection";
+import StatsAndTestimonialsSection from "@/components/about-page/StatsAndTestimonialsSection";
+import TeamSection from "@/components/about-page/TeamSection";
+import FounderSection from "@/components/about-page/FounderSection";
+import CTASection from "@/components/about-page/CTASection";
 
 const About = () => {
   return (
-    <div className="min-h-screen bg-background">
-        <Navbar />
-      <main>
-        <HeroSection />
-        <MissionSection />
-        <FeaturesSection />
-        <AccessSection />
-        <TestimonialsSection />
-        <AgenciesSection />
+    <div className="min-h-screen flex flex-col">
+      <Navbar />
+
+      <main className="flex-1 bg-background pt-20">
+        <CTASection />
+
+        <FounderSection />
+
+        <TeamSection />
+        <StatsAndTestimonialsSection />
+
       </main>
+
       <Footer />
     </div>
   );

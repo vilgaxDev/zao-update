@@ -13,11 +13,13 @@ const Services = () => {
       <Navbar />
       <main>
         <HeroSection />
-        <AIAssistantSection />
-        <MarketplaceSection />
+      
+       
         <LearningSection />
         <CommunitySection />
-        <GetStartedSection />
+         <MarketplaceSection />
+           <AIAssistantSection />
+        {/* <GetStartedSection /> */}
       </main>
       <Footer />
     </div>
