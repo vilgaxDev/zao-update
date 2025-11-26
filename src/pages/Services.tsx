@@ -5,16 +5,20 @@ import AIAssistantSection from "@/components/services/AIAssistantSection";
 import MarketplaceSection from "@/components/services/MarketplaceSection";
 import LearningSection from "@/components/services/LearningSection";
 import CommunitySection from "@/components/services/CommunitySection";
-import GetStartedSection from "@/components/services/GetStartedSection";
+
+import FeaturesSection from "@/components/FeaturesSection";
+import GetStartedSection from "@/components/GetStartedSection";
+
 
 const Services = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
       <main>
-        <HeroSection />
+   
       
-       
+        <FeaturesSection />
+        <GetStartedSection />
         <LearningSection />
         <CommunitySection />
          <MarketplaceSection />
