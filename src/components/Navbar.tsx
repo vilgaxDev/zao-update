@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 
 const Navbar = () => {
@@ -8,14 +7,14 @@ const Navbar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
-  // Detect scroll position
+  // Detect scroll
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      setIsScrolled(window.scrollY > 20);
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   // Close sidebar when route changes
@@ -35,89 +34,63 @@ const Navbar = () => {
     };
   }, [isSidebarOpen]);
 
-  const isActive = (path: string) => {
-    if (path === "/") {
-      return location.pathname === "/";
-    }
-    return location.pathname.startsWith(path);
-  };
-
-  const getLinkClassName = (path: string) => {
-    const isHomepage = location.pathname === "/";
-    // On homepage, use white text only when not scrolled
-    if (isHomepage && !isScrolled) {
-      return isActive(path)
-        ? "text-accent font-bold transition-colors"
-        : "text-white hover:text-accent transition-colors font-medium";
-    }
-    return isActive(path)
-      ? "text-accent font-bold transition-colors"
-      : "text-foreground hover:text-primary transition-colors font-medium";
-  };
-
   const closeSidebar = () => {
     setIsSidebarOpen(false);
   };
 
-  // Check if we're on the homepage
-  const isHomepage = location.pathname === "/";
+  // Check if we're on home page
+  const isHomePage = location.pathname === "/";
 
-  // Determine if navbar should have background
-  const hasBackground = !isHomepage || isScrolled;
+  // Determine navbar style based on page and scroll state
+  const navbarClasses = isHomePage && !isScrolled
+    ? "bg-transparent shadow-none"
+    : "bg-white shadow-sm";
+
+  const textClasses = isHomePage && !isScrolled
+    ? "text-white"
+    : "text-[#333]";
+
+  const hoverClasses = isHomePage && !isScrolled
+    ? "hover:text-yellow-300"
+    : "hover:text-[#6b8e23]";
 
   return (
     <>
-      <nav className={`${isScrolled || !isHomepage ? 'fixed' : 'absolute'} top-0 left-0 right-0 z-50 transition-all duration-300 ${hasBackground ? 'bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border shadow-sm' : 'bg-transparent'}`}>
-        <div className="container mx-auto px-6 py-4">
-          <div className="flex items-center justify-between">
-            <Link to="/" className="flex items-center">
-              <div className={`${isHomepage && !isScrolled ? 'bg-white' : 'bg-primary'} rounded-full px-6 py-3 transition-colors duration-300`}>
-                <span className={`text-2xl font-bold ${isHomepage && !isScrolled ? 'text-primary' : 'text-primary-foreground'} transition-colors duration-300`}>zao</span>
-              </div>
-            </Link>
-
-            {/* Desktop/Tablet Navigation - Shows on screens 900px and above */}
-            <div className="hidden lg:flex items-center gap-6 xl:gap-8">
-              <Link to="/" className={getLinkClassName("/")}>
-                Home
-              </Link>
-              <Link to="/about" className={getLinkClassName("/about")}>
-                About Us
-              </Link>
-              <Link to="/services" className={getLinkClassName("/services")}>
-                Our Services
-              </Link>
-              <Link to="/demo" className={getLinkClassName("/demo")}>
-                App Demo
-              </Link>
-              <Link to="/agencies" className={getLinkClassName("/agencies")}>
-                Agencies
-              </Link>
-              <Link to="/blog" className={getLinkClassName("/blog")}>
-                Blog
-              </Link>
-              <Link to="/contact">
-                <Button
-                  className={`font-semibold ${isActive("/contact")
-                    ? "bg-accent hover:bg-accent text-accent-foreground"
-                    : "bg-accent hover:bg-yellow-dark text-accent-foreground"
-                    }`}
-                >
-                  Contact Us
-                </Button>
-              </Link>
-            </div>
-
-            {/* Mobile Menu Button - Only shows on screens below 900px */}
-            <button
-              className="lg:hidden p-2 hover:bg-muted rounded-lg transition-colors"
-              onClick={() => setIsSidebarOpen(true)}
-              aria-label="Open menu"
-            >
-              <Menu className="w-6 h-6" />
-            </button>
-          </div>
+      <nav className={`flex items-center px-6 md:px-10 py-5 fixed top-0 left-0 right-0 z-50 font-sans transition-all duration-300 ${navbarClasses}`}>
+        {/* Logo */}
+        <div className="logo">
+          <Link to="/" className={`text-2xl font-bold ${textClasses} transition-colors`}>
+            zao
+          </Link>
         </div>
+
+        {/* Desktop Navigation - Grouped on the right */}
+        <div className="hidden lg:flex items-center gap-8 ml-auto">
+          <ul className="flex gap-8 list-none m-0 p-0">
+            <li><Link to="/" className={`${textClasses} ${hoverClasses} text-base font-medium transition-colors`}>Home</Link></li>
+            <li><Link to="/about" className={`${textClasses} ${hoverClasses} text-base font-medium transition-colors`}>About Us</Link></li>
+            <li><Link to="/services" className={`${textClasses} ${hoverClasses} text-base font-medium transition-colors`}>Our Services</Link></li>
+            <li><Link to="/demo" className={`${textClasses} ${hoverClasses} text-base font-medium transition-colors`}>App Demo</Link></li>
+            <li><Link to="/agencies" className={`${textClasses} ${hoverClasses} text-base font-medium transition-colors`}>Agencies</Link></li>
+            <li><Link to="/blog" className={`${textClasses} ${hoverClasses} text-base font-medium transition-colors`}>Blog</Link></li>
+          </ul>
+
+          {/* Contact Button */}
+          <Link to="/contact">
+            <button className="bg-[#f9a825] hover:bg-[#e69500] text-white px-5 py-2.5 text-base font-bold rounded-lg transition-colors cursor-pointer border-none">
+              Contact Us
+            </button>
+          </Link>
+        </div>
+
+        {/* Mobile Menu Button */}
+        <button
+          className={`lg:hidden p-2 ${textClasses} ${isHomePage && !isScrolled ? 'hover:bg-white/20' : 'hover:bg-gray-100'} rounded-lg transition-colors ml-auto`}
+          onClick={() => setIsSidebarOpen(true)}
+          aria-label="Open menu"
+        >
+          <Menu className="w-6 h-6" />
+        </button>
       </nav>
 
       {/* Overlay - Only on mobile */}
@@ -128,21 +101,17 @@ const Navbar = () => {
         />
       )}
 
-
-
       {/* Sidebar - Only on mobile */}
       <div
-        className={`fixed top-0 right-0 h-full w-[280px] bg-background z-[70] transform transition-transform duration-300 ease-in-out lg:hidden shadow-2xl ${isSidebarOpen ? "translate-x-0" : "translate-x-full"}`}
+        className={`fixed top-0 right-0 h-full w-[280px] bg-white z-[70] transform transition-transform duration-300 ease-in-out lg:hidden shadow-2xl ${isSidebarOpen ? "translate-x-0" : "translate-x-full"}`}
       >
         <div className="flex flex-col h-full">
           {/* Sidebar Header */}
-          <div className="flex items-center justify-between p-6 border-b border-border">
-            <div className="bg-primary rounded-full px-4 py-2">
-              <span className="text-xl font-bold text-primary-foreground">zao</span>
-            </div>
+          <div className="flex items-center justify-between p-6 border-b border-gray-200">
+            <span className="text-xl font-bold text-[#333]">zao</span>
             <button
               onClick={closeSidebar}
-              className="p-2 hover:bg-muted rounded-lg transition-colors"
+              className="p-2 hover:bg-gray-100 rounded-lg transition-colors text-[#333]"
               aria-label="Close menu"
             >
               <X className="w-6 h-6" />
@@ -150,19 +119,19 @@ const Navbar = () => {
           </div>
           {/* Sidebar Navigation */}
           <div className="flex-1 overflow-y-auto p-6 space-y-4">
-            <Link to="/" className="block py-3 px-4 text-yellow-400 hover:text-yellow-300" onClick={closeSidebar}>Home</Link>
-            <Link to="/about" className="block py-3 px-4 text-yellow-400 hover:text-yellow-300" onClick={closeSidebar}>About Us</Link>
-            <Link to="/services" className="block py-3 px-4 text-yellow-400 hover:text-yellow-300" onClick={closeSidebar}>Our Services</Link>
-            <Link to="/demo" className="block py-3 px-4 text-yellow-400 hover:text-yellow-300" onClick={closeSidebar}>App Demo</Link>
-            <Link to="/agencies" className="block py-3 px-4 text-yellow-400 hover:text-yellow-300" onClick={closeSidebar}>Agencies</Link>
-            <Link to="/blog" className="block py-3 px-4 text-yellow-400 hover:text-yellow-300" onClick={closeSidebar}>Blog</Link>
+            <Link to="/" className="block py-3 px-4 text-[#333] hover:text-[#6b8e23] font-medium" onClick={closeSidebar}>Home</Link>
+            <Link to="/about" className="block py-3 px-4 text-[#333] hover:text-[#6b8e23] font-medium" onClick={closeSidebar}>About Us</Link>
+            <Link to="/services" className="block py-3 px-4 text-[#333] hover:text-[#6b8e23] font-medium" onClick={closeSidebar}>Our Services</Link>
+            <Link to="/demo" className="block py-3 px-4 text-[#333] hover:text-[#6b8e23] font-medium" onClick={closeSidebar}>App Demo</Link>
+            <Link to="/agencies" className="block py-3 px-4 text-[#333] hover:text-[#6b8e23] font-medium" onClick={closeSidebar}>Agencies</Link>
+            <Link to="/blog" className="block py-3 px-4 text-[#333] hover:text-[#6b8e23] font-medium" onClick={closeSidebar}>Blog</Link>
           </div>
           {/* Sidebar Footer */}
-          <div className="p-6 border-t border-border">
+          <div className="p-6 border-t border-gray-200">
             <Link to="/contact" onClick={closeSidebar}>
-              <Button className="w-full font-semibold bg-accent hover:bg-accent text-accent-foreground">
+              <button className="w-full bg-[#f9a825] hover:bg-[#e69500] text-white px-5 py-3 text-base font-bold rounded-lg transition-colors cursor-pointer border-none">
                 Contact Us
-              </Button>
+              </button>
             </Link>
           </div>
         </div>

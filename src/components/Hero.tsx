@@ -6,16 +6,16 @@ import feature3 from "@/assets/hero-feature-market.png";
 
 const Hero = () => {
   return (
-    <section className="relative min-h-screen w-full overflow-hidden">
+    <section className="relative min-h-screen w-full overflow-hidden -mt-[80px] bg-gradient-to-b from-green-50 to-green-100">
       {/* Background Image */}
       <img
         src={heroBackground}
         alt="Hero background"
-        className="absolute inset-0 w-full h-full object-cover"
+        className="absolute inset-0 w-full h-full object-cover md:object-contain object-center"
       />
 
       {/* Content */}
-      <div className="container mx-auto px-6 lg:px-12 relative z-10 h-full flex items-center">
+      <div className="container mx-auto px-6 lg:px-12 relative z-10 h-full flex items-center pt-[80px]">
         <div className="grid lg:grid-cols-2 gap-16 items-center w-full max-w-2xl">
           {/* Left Side - Hero Content */}
           {/* <div className="text-white animate-fade-in">

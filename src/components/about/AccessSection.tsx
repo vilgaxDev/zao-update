@@ -10,7 +10,7 @@ const AccessSection = () => {
           Access Zao Your Way
         </h2>
         <p className="text-center text-muted-foreground max-w-3xl mx-auto mb-16">
-          Choose the access method that works best for your situation. Every farmer can 
+          Choose the access method that works best for your situation. Every farmer can
           participate regardless of their device or connectivity.
         </p>
 
@@ -57,36 +57,67 @@ const AccessSection = () => {
           {/* USSD Access */}
           <div className="bg-card border border-border rounded-2xl p-8">
             <div className="w-16 h-16 rounded-xl bg-primary/10 flex items-center justify-center mb-6">
-              <span className="text-3xl">📱</span>
+              <span className="text-3xl font-bold text-primary">#</span>
             </div>
             <h3 className="text-2xl font-bold text-foreground mb-4">USSD Access</h3>
             <p className="text-muted-foreground mb-6">
               Use any basic phone to access key farming tips, market prices, and community updates through simple menu navigation.
             </p>
-            <div className="bg-muted/50 rounded-lg p-4 mb-6">
-              <div className="text-sm text-muted-foreground mb-2">Dial *XYZ*123#</div>
-              <div className="space-y-2 text-xs">
-                <div className="bg-background p-2 rounded">Registration:<br />(Enter County, Sub-County And Ward)</div>
-                <div className="bg-background p-2 rounded">
-                  Select<br />
-                  1. Crop<br />
-                  2. Livestock<br />
-                  3. Equipment
+
+            <div className="flex flex-col gap-4">
+              {/* Row 1: Dial & Registration */}
+              <div className="flex gap-4">
+                <div className="flex-1 bg-muted/30 border border-border rounded-lg p-3 flex items-center justify-center text-center">
+                  <span className="text-sm font-semibold">Dial *XYZ*123#</span>
                 </div>
-                <div className="bg-background p-2 rounded">
-                  1. Buy<br />
-                  2. Sell<br />
-                  3. My Account
+                <div className="flex-1 bg-muted/30 border border-border rounded-lg p-3 flex flex-col items-center justify-center text-center">
+                  <span className="text-xs font-bold mb-1">Registration:</span>
+                  <span className="text-[10px] text-muted-foreground leading-tight">(Enter County, Sub-County And Ward)</span>
                 </div>
-                <div className="bg-background p-2 rounded">
-                  Select<br />
-                  1. Subscribe to Alerts<br />
-                  2. Buy Market<br />
-                  3. Edit Profile
+              </div>
+
+              {/* Row 2: Menu & Select */}
+              <div className="flex gap-4">
+                <div className="flex-1 bg-muted/30 border border-border rounded-lg p-3">
+                  <div className="text-xs space-y-1">
+                    <div className="font-semibold">1. Buy</div>
+                    <div className="font-semibold">2. Sell</div>
+                    <div className="font-semibold">3. My Account</div>
+                  </div>
                 </div>
-                <div className="bg-primary text-white p-2 rounded">
-                  Select<br />
-                  1. Order, Livestock/<br />Equipment - Services
+                <div className="flex-1 bg-muted/30 border border-border rounded-lg p-3">
+                  <div className="text-xs font-bold mb-1">Select</div>
+                  <div className="text-[10px] text-muted-foreground space-y-0.5">
+                    <div>1. Crop</div>
+                    <div>2. Livestock</div>
+                    <div>3. Equipment</div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Row 3: Contact Info */}
+              <div className="bg-muted/30 border border-border rounded-lg p-3 text-center">
+                <p className="text-xs text-muted-foreground">
+                  Buyer/Seller Contact Will Be Sent To Your Phone Directly
+                </p>
+              </div>
+
+              {/* Row 4: Green Actions */}
+              <div className="flex gap-4">
+                <div className="flex-1 bg-green-700 text-white rounded-lg p-3">
+                  <div className="text-xs font-bold mb-1">Select</div>
+                  <div className="text-[10px] space-y-0.5 opacity-90">
+                    <div>1. Subscribe To Alerts</div>
+                    <div>2. View My Listing</div>
+                    <div>3. Edit Profile</div>
+                  </div>
+                </div>
+                <div className="flex-1 bg-green-700 text-white rounded-lg p-3">
+                  <div className="text-xs font-bold mb-1">Select</div>
+                  <div className="text-[10px] space-y-0.5 opacity-90">
+                    <div>1. Order/ Livestock/</div>
+                    <div>Equipment - Services</div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -102,7 +133,11 @@ const AccessSection = () => {
               Access Zao through any web browsers on desktop or mobile. Quick registration gets you started immediately
             </p>
             <div className="space-y-4 mb-6">
-              <Input placeholder="Full Name" />
+              <div className="grid grid-cols-2 gap-4">
+                <Input placeholder="First Name" />
+                <Input placeholder="Last Name" />
+              </div>
+              <Input placeholder="Email Address" type="email" />
               <Input placeholder="Phone Number" type="tel" />
               <select className="w-full h-10 px-3 rounded-md border border-input bg-background text-sm">
                 <option>Select your region</option>

@@ -42,13 +42,13 @@ All colors MUST be HSL.
     --green-dark: 140 50% 18%;
     --green-light: 140 35% 35%;
     --green-accent: 145 63% 49%;
-    
+
     --cream: 38 35% 96%;
     --cream-dark: 38 25% 88%;
-    
+
     --yellow-accent: 41 85% 50%;
     --yellow-dark: 41 85% 42%;
-    
+
     --decorative-green-light: 120 40% 90%;
     --decorative-yellow-light: 41 90% 95%;
     --decorative-pink-light: 350 100% 95%;
@@ -92,5 +92,25 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+.delay-200 {
+  animation-delay: 0.2s;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
